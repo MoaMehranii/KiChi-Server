@@ -1,0 +1,10 @@
+#include "Commands/CommandRegistry.hpp"
+#include "Commands/ClearCommand.hpp"
+#include "Commands/ContainsCommand.hpp"
+#include "Commands/GetCommand.hpp"
+#include "Commands/IsEmptyCommand.hpp"
+#include "Commands/PopCommand.hpp"
+#include "Commands/PutCommand.hpp"
+#include "Commands/RemoveCommand.hpp"
+#include "Commands/SizeCommand.hpp"
+namespace kichi::commands {CommandRegistry::CommandRegistry(){commands_.emplace("PUT",std::make_unique<PutCommand>());commands_.emplace("GET",std::make_unique<GetCommand>());commands_.emplace("REMOVE",std::make_unique<RemoveCommand>());commands_.emplace("POP",std::make_unique<PopCommand>());commands_.emplace("CLEAR",std::make_unique<ClearCommand>());commands_.emplace("EXISTS",std::make_unique<ContainsCommand>());commands_.emplace("MAP_SIZE",std::make_unique<SizeCommand>());commands_.emplace("IS_EMPTY",std::make_unique<IsEmptyCommand>());}Command* CommandRegistry::getCommand(const std::string& n)const{auto i=commands_.find(n);return i==commands_.end()?nullptr:i->second.get();}}
